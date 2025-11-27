@@ -1,0 +1,177 @@
+:root { 
+  --bg: #0a0f14; 
+  --surface: #11161d; 
+  --text: #e6edf3; 
+  --muted: #93a1ad; 
+  --rgb: conic-gradient(from 0deg, #ff0040, #ff8a00, #ffe600, #00ff95, #00c2ff, #7a00ff, #ff00e5, #ff0040);
+}
+
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body { 
+  margin: 0; 
+  font-family: "Cairo", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; 
+  background: var(--bg); 
+  color: var(--text);
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.bg { 
+  position: fixed; inset: 0; 
+  background: radial-gradient(1200px 600px at 10% 20%, rgba(124,58,237,.12), transparent),
+              radial-gradient(800px 400px at 80% 10%, rgba(6,182,212,.12), transparent),
+              radial-gradient(900px 500px at 50% 80%, rgba(244,63,94,.12), transparent);
+  filter: blur(30px) saturate(120%);
+  pointer-events: none; 
+  animation: float 16s ease-in-out infinite;
+}
+
+@keyframes float { 
+  0%, 100% { transform: translate3d(0,0,0) scale(1); }
+  50% { transform: translate3d(0,-10px,0) scale(1.02); }
+}
+
+.header { 
+  position: sticky; top: 0; z-index: 10; 
+  backdrop-filter: blur(8px); 
+  background: rgba(10,15,20,.6);
+  border-bottom: 1px solid rgba(255,255,255,.06);
+  display: flex; align-items: center; justify-content: space-between; 
+  padding: 16px 24px;
+}
+.brand { font-weight: 700; font-size: 20px; }
+.nav { display: flex; gap: 16px; }
+.nav-link { color: var(--text); text-decoration: none; opacity: .86; }
+.nav-link:hover { opacity: 1; }
+
+.hero { 
+  min-height: 60vh; 
+  display: grid; place-items: center; text-align: center; 
+  padding: 64px 24px;
+}
+.title { font-size: clamp(32px, 6vw, 64px); font-weight: 700; }
+.subtitle { font-size: 18px; color: var(--muted); margin: 12px 0 24px; }
+
+.btn { 
+  display: inline-block; 
+  padding: 12px 20px; 
+  border-radius: 12px; 
+  text-decoration: none; 
+  color: var(--text);
+  background: var(--surface);
+}
+.btn:hover { filter: brightness(1.1); }
+
+.neon-btn { 
+  position: relative;
+  background: #0b1117;
+  border: 1px solid rgba(255,255,255,.08);
+}
+.neon-btn::before { 
+  content: ""; position: absolute; inset: -2px; border-radius: 14px; 
+  background: var(--rgb);
+  filter: blur(12px) saturate(150%);
+  opacity: .55; z-index: -1; 
+  animation: pulse 3.5s ease-in-out infinite;
+}
+@keyframes pulse { 
+  0%, 100% { opacity: .45; }
+  50% { opacity: .75; }
+}
+
+@keyframes spin { 
+  to { transform: rotate(360deg); }
+}
+
+.rgb-text { 
+  background: linear-gradient(90deg, #ff0040, #ff8a00, #ffe600, #00ff95, #00c2ff, #7a00ff, #ff00e5);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+
+.rgb-glow { 
+  position: relative; display: inline-block;
+}
+.rgb-glow::after { 
+  content: ""; position: absolute; left: 50%; bottom: -6px; transform: translateX(-50%);
+  width: 80%; height: 2px; border-radius: 2px; background: var(--rgb); 
+  filter: blur(6px); opacity: .7; animation: pulse 4s ease-in-out infinite;
+}
+
+.section { padding: 40px 24px; max-width: 1100px; margin: 0 auto; }
+.section-title { font-size: 24px; margin-bottom: 20px; }
+.rgb-underline { position: relative; }
+.rgb-underline::after { content: ""; position: absolute; right: 0; bottom: -8px; width: 160px; height: 3px; background: var(--rgb); filter: blur(4px); animation: spin 10s linear infinite; }
+
+.grid { 
+  display: grid; 
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); 
+  gap: 16px;
+}
+.card { 
+  background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.02)); 
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 16px; 
+  padding: 16px; 
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.card:hover { 
+  transform: translateY(-4px); 
+  box-shadow: 0 0 0 1px rgba(255,255,255,.06), 0 16px 40px rgba(0,0,0,.5), 0 0 30px rgba(124,58,237,.25);
+}
+.card-header { font-weight: 700; margin-bottom: 8px; font-size: 20px; }
+.card-text { color: var(--muted); margin-bottom: 12px; }
+.btn-download { background: #121820; border: 1px solid rgba(255,255,255,.06); }
+.btn-download:hover { background: #0f141a; }
+
+.contact { 
+  display: grid; grid-template-columns: 1fr; gap: 12px; 
+  max-width: 640px;
+}
+.input { 
+  width: 100%; padding: 12px 14px; border-radius: 12px; 
+  background: #0b1117; color: var(--text); border: 1px solid rgba(255,255,255,.08);
+}
+
+.footer { margin-top: 40px; padding: 20px 24px; border-top: 1px solid rgba(255,255,255,.06); background: rgba(10,15,20,.5); }
+.footer-inner { display: flex; gap: 10px; align-items: center; justify-content: center; }
+
+@media (max-width: 600px) {
+  .nav { gap: 8px; }
+  .subtitle { font-size: 16px; }
+  .section { padding: 32px 16px; }
+}
+
+.discord-card { 
+  background: linear-gradient(180deg, rgba(59,130,246,.20), rgba(37,99,235,.18)); 
+  border: 1px solid rgba(59,130,246,.35);
+  border-radius: 16px; 
+  padding: 12px; 
+  width: 503px; height: 168px; 
+  margin: 0;
+  display: inline-flex; align-items: center; justify-content: space-between; gap: 12px;
+  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+}
+.discord-card:hover, .discord-card:focus-within { 
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(37,99,235,.25);
+  border-color: rgba(59,130,246,.5);
+}
+.discord-header { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; flex-wrap: wrap; }
+.discord-top { display: flex; align-items: center; gap: 8px; }
+.discord-logo { width: 24px; height: 24px; color: var(--text); }
+.discord-title { font-weight: 700; font-size: 16px; }
+.discord-title { margin-top: -6px; }
+.discord-badges { display: flex; flex-direction: column; gap: 6px; align-items: flex-start; }
+.badge { 
+  display: inline-flex; align-items: center; gap: 6px; 
+  padding: 4px 8px; border-radius: 999px; 
+  background: #121820; border: 1px solid rgba(255,255,255,.06); color: var(--text);
+  font-size: 12px;
+}
+.badge.online { border-color: rgba(0,255,149,.35); }
+.join-btn { white-space: nowrap; padding: 10px 14px; }
+.join-btn::before { display: none !important; }
+
+.section#discord { text-align: right; }
