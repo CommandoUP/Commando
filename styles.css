@@ -152,7 +152,6 @@ body {
   margin: 0;
   display: inline-flex; align-items: center; justify-content: space-between; gap: 12px;
   transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
-  position: relative;
 }
 .discord-card:hover, .discord-card:focus-within { 
   transform: translateY(-2px);
@@ -176,51 +175,3 @@ body {
 .join-btn::before { display: none !important; }
 
 .section#discord { text-align: right; }
-.site-stats { position: fixed; top: 18px; left: 404px; display: flex; gap: 8px; z-index: 1000; }
-.stats-badge { background: rgba(11,17,23,.6); border: 1px solid rgba(255,255,255,.08); color: var(--text); font-size: 12px; padding: 4px 8px; border-radius: 6px; display: inline-flex; align-items: center; gap: 6px; }
-.status-text {
-  position: absolute;
-  top: 9px;
-  left: 6px;
-  font-size: 10px;
-  color: #e6edf3;
-}
-.status-chip {
-  position: absolute;
-  top: 9px;
-  left: 6px;
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  padding: 4px 12px;
-  border-radius: 6px;
-  background: rgba(18,24,32,.45);
-  border: 1px solid rgba(255,255,255,.10);
-  color: var(--text);
-  font-size: 10px;
-  line-height: 1.2;
-  backdrop-filter: none;
-}
-.status-chip .label { margin-left: 3px; transform: translateY(1px); }
-.status-chip .dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: #ff4d4f;
-  position: relative;
-  box-shadow: none;
-}
-.status-chip .dot.red { background: #ff4d4f; animation: blink 1.6s ease-in-out infinite; }
-.status-chip .dot.green { background: #00ff95; animation: blink 1.6s ease-in-out infinite; }
-@keyframes blink {
-  0%, 100% { opacity: .85; transform: scale(1); }
-  50% { opacity: .55; transform: scale(1.1); }
-}
-.status-chip .dot::after {
-  content: none;
-  display: none;
-}
-@keyframes ping {
-  0% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
-  100% { transform: translate(-50%, -50%) scale(2); opacity: 0; }
-}
