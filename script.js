@@ -43,36 +43,4 @@ document.addEventListener('DOMContentLoaded', () => {
         onlineEl.textContent = '--'
       })
   }
-
-  const ns = 'commando-web'
-  const siteOnlineEl = document.getElementById('site-online')
-  const siteUniqueEl = document.getElementById('site-unique')
-  const uidKey = 'device_id_v1'
-  const uniqueKey = 'unique_counted_v1'
-  let uid = localStorage.getItem(uidKey)
-  if (!uid) {
-    uid = Math.random().toString(36).slice(2) + Date.now().toString(36)
-    localStorage.setItem(uidKey, uid)
-  }
-  if (!localStorage.getItem(uniqueKey)) {
-    fetch(`https://api.countapi.xyz/update/${ns}/total_unique?amount=1`, { method: 'GET' })
-      .then(() => localStorage.setItem(uniqueKey, '1'))
-      .catch(() => {})
-  }
-  fetch(`https://api.countapi.xyz/update/${ns}/online?amount=1`, { method: 'GET' }).catch(() => {})
-  const dec = () => {
-    fetch(`https://api.countapi.xyz/update/${ns}/online?amount=-1`, { method: 'GET', keepalive: true }).catch(() => {})
-  }
-  window.addEventListener('pagehide', dec)
-  window.addEventListener('beforeunload', dec)
-  const refresh = () => {
-    fetch(`https://api.countapi.xyz/get/${ns}/online`).then(r => r.json()).then(d => {
-      if (siteOnlineEl) siteOnlineEl.textContent = typeof d.value === 'number' ? d.value : '--'
-    }).catch(() => { if (siteOnlineEl) siteOnlineEl.textContent = '--' })
-    fetch(`https://api.countapi.xyz/get/${ns}/total_unique`).then(r => r.json()).then(d => {
-      if (siteUniqueEl) siteUniqueEl.textContent = typeof d.value === 'number' ? d.value : '--'
-    }).catch(() => { if (siteUniqueEl) siteUniqueEl.textContent = '--' })
-  }
-  refresh()
-  setInterval(refresh, 10000)
 })
